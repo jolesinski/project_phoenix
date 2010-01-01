@@ -3,7 +3,7 @@ import json
 
 
 def main():
-    url = "http://localhost:8383/"
+    url = "http://localhost:12345/"
     headers = {'content-type': 'application/json'}
 
     # Example echo method

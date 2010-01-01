@@ -46,10 +46,12 @@ class Fieldbus():
     def request(self, address, respond, command, params=[]):
         self.status = FieldbusStatuses.OK
         request = RequestFrame(address, respond, command, params)
-        print repr(request.str())
+        print 'Requesting address ' + str(address) + ' command ' + str(command) + 'params ' + str(params) 
+        raw_frame = request.str()
+        print repr(raw_frame)
         response = None
         try:
-            self._send_data_to_bus(request.str)
+            self._send_data_to_bus(raw_frame)
         except serial.SerialTimeoutException:
             self.status = FieldbusStatuses.WR_TIMEOUT
             # add log.error
@@ -108,17 +110,27 @@ class Fieldbus():
         self._write_to_port(data[1:])
 
     def _get_response(self):
+        print 'Waiting for response...'
         response = ResponseFrame()
         self._port.timeout = self._read_timeout
-        response.address = ord(self._port.read(1))
-
+        #skip zeros
+        c = 0
+        while c == 0:
+            c = ord(self._port.read(1))
+        response.address = c
+        print 'Respoonse from addr: ' + str(response.address)
         self._port.timeout = 0.5
         response.command = ord(self._port.read(1))
+        print 'Respoonse for command: ' + str(response.command)
+        #missing data count in response?
         data_count = ord(self._port.read(1))
-        for _ in range(data_count):
-            response.data.append(ord(self._port.read(1)))
+        if data_count == 1:
+            response.data.append(data_count)
+        else:
+            for _ in range(data_count):
+                response.data.append(ord(self._port.read(1)))
+        print 'Respoonse data: ' + str(response.data)
         crc8 = ord(self._port.read(1))
-
         if crc8 == response.calculate_crc8():
             return response
         else:

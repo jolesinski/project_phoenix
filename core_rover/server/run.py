@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from common import get_dispatcher
 
 if __name__ == '__main__':

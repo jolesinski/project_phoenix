@@ -3,7 +3,9 @@ from subsystems.drivers.base import BaseDriver
 
 class StepperMotor(BaseDriver):
     def move(self, steps=0):
-        response_dict = self._request(command=1, params=[steps])
+        tenths = ((steps/10) % 10)
+        oneths = (steps % 10)
+        response_dict = self._request(command=1, params=[tenths, oneths])
         return response_dict
 
     def set_angle(self, angle=0):
