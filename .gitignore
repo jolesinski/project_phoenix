@@ -1,6 +1,9 @@
 # Compiled python files
 *.pyc
 
+# Python cache
+__pycache__
+
 # Compiled Object files
 *.slo
 *.lo
