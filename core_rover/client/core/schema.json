@@ -1,0 +1,67 @@
+[
+    {
+        "name": "setJointAngle",
+        "params": {
+            "joint": 1,
+            "angle": 3.14
+        },
+        "returns": 1
+    },
+    {
+        "name": "getJointAngle",
+        "params": {
+            "joint": 1
+        },
+        "returns": 3.14
+    },
+    {
+        "name": "setJointSpeed",
+        "params": {
+            "joint": 1,
+            "speed": 1
+        },
+        "returns": 1
+    },
+    {
+        "name": "getJointSpeed",
+        "params": {
+            "joint": 1
+        },
+        "returns": 1
+    },
+    {
+        "name": "setCartesianPosition",
+        "params": {
+            "x": 3.14,
+            "y": 3.14,
+            "z": 3.14
+        },
+        "returns": 1
+    },
+    {
+        "name": "getCartesianPosition",
+        "returns": [3.14, 3.14, 3.14]
+    },
+    {
+        "name": "setGripper",
+        "params": {
+            "open": true
+        },
+        "returns": 1
+    },
+    {
+        "name": "setWheelSpeed",
+        "params": {
+            "wheel": 1,
+            "speed": 1
+        },
+        "returns": 1
+    },
+    {
+        "name": "getWheelSpeed",
+        "params": {
+            "wheel": 1
+        },
+        "returns": 1
+    }
+]
