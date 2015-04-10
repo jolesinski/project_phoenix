@@ -11,6 +11,7 @@
 """
 
 from jsonrpc import JSONRPCResponseManager, dispatcher
+from utils import throwInvalidParams, isStrictInt
 from werkzeug.wrappers import Request, Response
 
 
@@ -29,12 +30,14 @@ def setJointAngle(joint, angle):
     Returns
     -------
     status_code : int
-        Determines the success or failure of a RPC. Equals 0 on success,
-        otherwise -1.
+        Returns 0, because we want to handle errors and thats impossible with
+        notifications.
     """
 
-    # Status code returned by method
-    status_code = -1
+    # Check if params are correct
+    if not (isStrictInt(joint) and isinstance(angle, float)):
+        # If not, send Invalid params error to client
+        throwInvalidParams()
 
     # Body
     status_code = 0
@@ -56,6 +59,11 @@ def getJointAngle(joint):
         Angle of a specified joint in radians.
     """
 
+    # Check if params are correct
+    if not isStrictInt(joint):
+        # If not, send Invalid params error to client
+        throwInvalidParams()
+
     # Set initial angle to default value
     angle = 0.0
     return angle
@@ -75,12 +83,14 @@ def setJointSpeed(joint, speed):
     Returns
     -------
     status_code : int
-        Determines the success or failure of a RPC. Equals 0 on success,
-        otherwise -1.
+        Returns 0, because we want to handle errors and thats impossible with
+        notifications.
     """
 
-    # Status code returned by method
-    status_code = -1
+    # Check if params are correct
+    if not (isStrictInt(joint) and isStrictInt(speed)):
+        # If not, send Invalid params error to client
+        throwInvalidParams()
 
     # Body
     status_code = 0
@@ -102,6 +112,11 @@ def getJointSpeed(joint):
         Speed of a specified joint in scale 1-100.
     """
 
+    # Check if params are correct
+    if not isStrictInt(joint):
+        # If not, send Invalid params error to client
+        throwInvalidParams()
+
     # Set initial angle to default value
     speed = 0
     return speed
@@ -119,12 +134,16 @@ def setCartesianPosition(x, y, z):
     Returns
     -------
     status_code : int
-        Determines the success or failure of a RPC. Equals 0 on success,
-        otherwise -1.
+        Returns 0, because we want to handle errors and thats impossible with
+        notifications.
     """
 
-    # Status code returned by method
-    status_code = -1
+    # Check if params are correct
+    if not (isinstance(x, float) and
+            isinstance(y, float) and
+            isinstance(z, float)):
+        # If not, send Invalid params error to client
+        throwInvalidParams()
 
     # Body
     status_code = 0
@@ -159,12 +178,14 @@ def setGripper(open):
     Returns
     -------
     status_code : int
-        Determines the success or failure of a RPC. Equals 0 on success,
-        otherwise -1.
+        Returns 0, because we want to handle errors and thats impossible with
+        notifications.
     """
 
-    # Status code returned by method
-    status_code = -1
+    # Check if params are correct
+    if not isinstance(open, bool):
+        # If not, send Invalid params error to client
+        throwInvalidParams()
 
     # Body
     status_code = 0
@@ -185,12 +206,14 @@ def setWheelSpeed(wheel, speed):
     Returns
     -------
     status_code : int
-        Determines the success or failure of a RPC. Equals 0 on success,
-        otherwise -1.
+        Returns 0, because we want to handle errors and thats impossible with
+        notifications.
     """
 
-    # Status code returned by method
-    status_code = -1
+    # Check if params are correct
+    if not (isStrictInt(wheel) and isStrictInt(speed)):
+        # If not, send Invalid params error to client
+        throwInvalidParams()
 
     # Body
     status_code = 0
@@ -211,6 +234,11 @@ def getWheelSpeed(wheel):
     speed: int
         Speed of a specified wheel in radians.
     """
+
+    # Check if params are correct
+    if not isStrictInt(wheel):
+        # If not, send Invalid params error to client
+        throwInvalidParams()
 
     # Set initial angle to default value
     speed = 0
