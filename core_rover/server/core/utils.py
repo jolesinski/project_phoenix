@@ -1,19 +1,14 @@
 from jsonrpc.exceptions import JSONRPCDispatchException
 
 
-# Functions throwing errors used in dispatch functions
-def throwInvalidParams():
-    r"""Sets error in response to Invalid params error.
+class InvalidParametersException(JSONRPCDispatchException):
 
-    Raises
-    ------
-        JSON-RPC Dispatch Exception with code and message for Invalid params
-    """
-    raise JSONRPCDispatchException(code=-32602,
-                                   message="Invalid params")
+    def __init__(self):
+        self.code = -32602
+        self.message = "Invalid params"
 
 
-def isStrictInt(value):
+def is_strict_int(value):
     r"""Checks if values type is int (in python isinstance(True/False, int) returns True).
 
     Params

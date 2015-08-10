@@ -1,21 +1,8 @@
-# =============================================================================
-# File name: dispatcher.py
-# Authors: Bartlomiej Lisiecki
-# Python version: 2.7
-# =============================================================================
-
-"""
-    JSON-RPC dispatcher module.
-
-    Dispatcher with defined API for communication between client and server.
-"""
-
 from jsonrpc import JSONRPCResponseManager, dispatcher
-from utils import throwInvalidParams, isStrictInt
+from utils import InvalidParametersException, is_strict_int
 from werkzeug.wrappers import Request, Response
 
 
-#  Methods defined for server.
 @dispatcher.add_method
 def setJointAngle(joint, angle):
     r"""Sets angle of a specified joint.
@@ -34,12 +21,8 @@ def setJointAngle(joint, angle):
         notifications.
     """
 
-    # Check if params are correct
-    if not (isStrictInt(joint) and isinstance(angle, float)):
-        # If not, send Invalid params error to client
-        throwInvalidParams()
-
-    # Body
+    if not (is_strict_int(joint) and isinstance(angle, float)):
+        raise InvalidParametersException()
     status_code = 0
     return status_code
 
@@ -59,12 +42,9 @@ def getJointAngle(joint):
         Angle of a specified joint in radians.
     """
 
-    # Check if params are correct
-    if not isStrictInt(joint):
-        # If not, send Invalid params error to client
-        throwInvalidParams()
+    if not is_strict_int(joint):
+        raise InvalidParametersException()
 
-    # Set initial angle to default value
     angle = 0.0
     return angle
 
@@ -87,10 +67,8 @@ def setJointSpeed(joint, speed):
         notifications.
     """
 
-    # Check if params are correct
-    if not (isStrictInt(joint) and isStrictInt(speed)):
-        # If not, send Invalid params error to client
-        throwInvalidParams()
+    if not (is_strict_int(joint) and is_strict_int(speed)):
+        raise InvalidParametersException()
 
     # Body
     status_code = 0
@@ -112,12 +90,9 @@ def getJointSpeed(joint):
         Speed of a specified joint in scale 1-100.
     """
 
-    # Check if params are correct
-    if not isStrictInt(joint):
-        # If not, send Invalid params error to client
-        throwInvalidParams()
+    if not is_strict_int(joint):
+        raise InvalidParametersException()
 
-    # Set initial angle to default value
     speed = 0
     return speed
 
@@ -138,14 +113,11 @@ def setCartesianPosition(x, y, z):
         notifications.
     """
 
-    # Check if params are correct
     if not (isinstance(x, float) and
             isinstance(y, float) and
             isinstance(z, float)):
-        # If not, send Invalid params error to client
-        throwInvalidParams()
+        raise InvalidParametersException()
 
-    # Body
     status_code = 0
     return status_code
 
@@ -161,7 +133,6 @@ def getCartesianPosition():
         y and z are float values.
     """
 
-    # Set initial angle to default value
     cartesianPos = [0.0, 0.0, 0.0]
     return cartesianPos
 
@@ -182,12 +153,9 @@ def setGripper(open):
         notifications.
     """
 
-    # Check if params are correct
     if not isinstance(open, bool):
-        # If not, send Invalid params error to client
-        throwInvalidParams()
+        raise InvalidParametersException()
 
-    # Body
     status_code = 0
     return status_code
 
@@ -210,12 +178,9 @@ def setWheelSpeed(wheel, speed):
         notifications.
     """
 
-    # Check if params are correct
-    if not (isStrictInt(wheel) and isStrictInt(speed)):
-        # If not, send Invalid params error to client
-        throwInvalidParams()
+    if not (is_strict_int(wheel) and is_strict_int(speed)):
+        raise InvalidParametersException()
 
-    # Body
     status_code = 0
     return status_code
 
@@ -235,17 +200,13 @@ def getWheelSpeed(wheel):
         Speed of a specified wheel in radians.
     """
 
-    # Check if params are correct
-    if not isStrictInt(wheel):
-        # If not, send Invalid params error to client
-        throwInvalidParams()
+    if not is_strict_int(wheel):
+        raise InvalidParametersException()
 
-    # Set initial angle to default value
     speed = 0
     return speed
 
 
-# Dispatcher application
 @Request.application
 def application(request):
     response = JSONRPCResponseManager.handle(
