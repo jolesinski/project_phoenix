@@ -1,5 +1,6 @@
-from core.dispatcher import application
+from server.common import get_dispatcher
 from werkzeug.serving import run_simple
 
 if __name__ == '__main__':
-    run_simple('localhost', 8383, application)
+    dispatcher = get_dispatcher()
+    dispatcher.run_application()

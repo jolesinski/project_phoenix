@@ -41,3 +41,10 @@ instance/
 
 # Local TODO
 TODO
+
+# Eggs
+*.egg-info*
+.egg
+
+# Test generater
+.idea

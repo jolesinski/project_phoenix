@@ -6,3 +6,11 @@
 
 ##Client
     Written in C++.
+
+##Usage
+    After cloning repo to disk install dependencies and set commands by typing.
+    `python setup.py develop`
+    If you want to run server type:
+    `python server/run.py`
+    You can run tests by typing:
+    `python setup.py test`

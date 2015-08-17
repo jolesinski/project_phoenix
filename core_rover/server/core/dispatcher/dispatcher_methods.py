@@ -1,7 +1,10 @@
-from jsonrpc import JSONRPCResponseManager, dispatcher
-from utils import InvalidParametersException, is_strict_int
+from jsonrpc import JSONRPCResponseManager
+from server.core.utils import InvalidParametersException, is_strict_int
 from werkzeug.wrappers import Request, Response
 
+from server.core.dispatcher.dispatcher import MethodDispatcher
+
+dispatcher = MethodDispatcher()
 
 @dispatcher.add_method
 def setJointAngle(joint, angle):
@@ -205,10 +208,3 @@ def getWheelSpeed(wheel):
 
     speed = 0
     return speed
-
-
-@Request.application
-def application(request):
-    response = JSONRPCResponseManager.handle(
-        request.data, dispatcher)
-    return Response(response.json, mimetype='application/json')
