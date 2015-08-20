@@ -2,7 +2,8 @@ import serial
 import time
 import enum
 
-from rs485 import Response, CommunicationError
+from .response import Response
+from .utils import CommunicationError
 
 
 class FieldbusStatuses(enum.Enum):

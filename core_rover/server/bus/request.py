@@ -1,5 +1,5 @@
 from array import array
-from rs485.utils import generate_crc8
+from .utils import generate_crc8
 
 # definitely needs refactoring (legacy code)
 class Request:
