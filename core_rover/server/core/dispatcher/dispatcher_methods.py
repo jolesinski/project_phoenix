@@ -6,6 +6,14 @@ from server.core.dispatcher.dispatcher import MethodDispatcher
 
 dispatcher = MethodDispatcher()
 
+# we could also move this methods to a standalone class
+# and add them as static (they cant accept self parameter)
+# but that would still require adding them to one dispatcher
+@dispatcher.add_method
+def stepper_motor_move(steps):
+    return dispatcher.stepper_motor.move()
+
+
 @dispatcher.add_method
 def setJointAngle(joint, angle):
     r"""Sets angle of a specified joint.
