@@ -2,10 +2,9 @@ from jsonrpc.exceptions import JSONRPCDispatchException
 
 
 class InvalidParametersException(JSONRPCDispatchException):
-
-    def __init__(self):
+    def __init__(self, message=None):
         self.code = -32602
-        self.message = "Invalid params"
+        self.message = message or "Invalid parameters"
 
 
 def is_strict_int(value):

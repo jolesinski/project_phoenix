@@ -12,14 +12,14 @@ class Request:
             self.__dict__['respond'] = 0
         self.__dict__['command'] = command
         self.__dict__['params'] = params
-        self.__dict__['crc8'] = self.calculateCrc8()
+        self.__dict__['crc8'] = self.calculate_crc8()
 
     def __setattr__(self, name, value):
         """
         Handles auto-update of Crc8 when some values change
         """
         self.__dict__[name] = value
-        self.__dict__['crc8'] = self.calculateCrc8()
+        self.__dict__['crc8'] = self.calculate_crc8()
 
     def calculate_crc8(self):
         temp = array('B')

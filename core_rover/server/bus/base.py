@@ -45,6 +45,7 @@ class FieldbusDispatcher(object):
 
     def send_frame(self, data):
         self.status = FieldbusStatuses.OK
+        response = None
         try:
             self._send_data_to_bus(data)
         except serial.SerialTimeoutException:
@@ -66,6 +67,7 @@ class FieldbusDispatcher(object):
                 #duplicated, refactor later
                 # add log.error
                 self.status = FieldbusStatuses.PORT_ERR
+        return response
 
 
     def _initialize_serial_port(self, port, baud, timeout):

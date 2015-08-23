@@ -20,4 +20,6 @@ class CommunicationError(Exception):
     def __init__(self, message=None):
         self.message = message or 'Communication error'
 
-
+class InvalidControllerParametersError(Exception):
+    def __init__(self, message=None):
+        self.message = message or 'Invalid controller parameters'

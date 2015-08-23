@@ -14,7 +14,7 @@ class TestUtils(object):
     def test_invalid_parameters_exception_data(self):
         exception = InvalidParametersException()
         assert exception.code == -32602
-        assert exception.message == "Invalid params"
+        assert exception.message == "Invalid parameters"
 
     @pytest.mark.parametrize(
         argnames='data',

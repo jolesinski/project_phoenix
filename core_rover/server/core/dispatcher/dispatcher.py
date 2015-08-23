@@ -4,6 +4,8 @@ from werkzeug.serving import run_simple
 from werkzeug.wrappers import Request, Response
 
 from server.bus.controllers import StepperMotor
+from server.bus.controllers import BLDCMotor
+
 
 class MethodDispatcher(Dispatcher):
     def __init__(
@@ -13,7 +15,8 @@ class MethodDispatcher(Dispatcher):
         self.address = address
         self.port = port
         self.bus_dispatcher = bus_dispatcher
-        self.motor = StepperMotor(bus=bus_dispatcher)
+        self.stepper_motor = StepperMotor(bus=bus_dispatcher)
+        self.bldc_motor = BLDCMotor(bus=bus_dispatcher)
 
     @Request.application
     def application(self, request):

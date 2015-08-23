@@ -1,13 +1,15 @@
-class StepperMotor(object):
-    def __init__(self, bus=None):
-        self.bus = bus
+from .base import BaseController
 
-    def _send_frame(self, data):
-        self.bus.send_frame(data=data)
+
+class StepperMotor(BaseController):
 
     def move(self, steps=0):
         # prepare data for move command
         self._send_frame(data=data)
+        # we probably need to analyze return msg
+        # and set status code
+        status_code = 0
+        return status_code
 
     def stop(self, steps=0):
         # prepare data for stop command
