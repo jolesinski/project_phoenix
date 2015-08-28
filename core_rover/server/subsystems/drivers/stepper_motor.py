@@ -38,10 +38,6 @@ class StepperMotor(BaseDriver):
         response_dict = self._request(command=9)
         return response_dict
 
-    def servo_set_position(self, position=0):
-        response_dict = self._request(command=20, params=[position])
-        return response_dict
-
     def reset(self):
         password = 'ASDF'
         response_dict = self._request(command=66, params=[password], respond=False)
