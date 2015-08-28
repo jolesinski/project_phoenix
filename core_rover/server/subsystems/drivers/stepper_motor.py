@@ -6,6 +6,14 @@ class StepperMotor(BaseDriver):
         response_dict = self._request(command=1, params=[steps])
         return response_dict
 
+    def set_angle(self, angle=0):
+        steps = self.stepper_angle_to_steps(angle)
+        return self.move(steps)
+
+    def stepper_angle_to_steps(self, angle):
+        #DO SOME MAGIC HERE
+        raise NotImplementedError
+
     def stop(self):
         response_dict = self._request(command=2)
         return response_dict
