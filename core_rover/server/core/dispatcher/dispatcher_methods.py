@@ -1,10 +1,12 @@
-from jsonrpc import JSONRPCResponseManager
-from server.core.utils import InvalidParametersException, is_strict_int
-from werkzeug.wrappers import Request, Response
-
-from server.core.dispatcher.dispatcher import MethodDispatcher
+from core_rover.server.core.dispatcher.dispatcher import MethodDispatcher
+from core_rover.server.core.utils import InvalidParametersException, is_strict_int
+#subsystems - dirty
+from core_rover.server.subsystems.manipulator import Manipulator
 
 dispatcher = MethodDispatcher()
+
+#subsystems - dirty
+manipulator = Manipulator()
 
 @dispatcher.add_method
 def setJointAngle(joint, angle):
@@ -26,7 +28,10 @@ def setJointAngle(joint, angle):
 
     if not (is_strict_int(joint) and isinstance(angle, float)):
         raise InvalidParametersException()
-    status_code = 0
+
+    #add validation
+    response = manipulator.joints[joint].set_angle(angle)
+    status_code = response.status
     return status_code
 
 
@@ -121,6 +126,8 @@ def setCartesianPosition(x, y, z):
             isinstance(z, float)):
         raise InvalidParametersException()
 
+    #TODO: add validation
+    manipulator.set_effector_position(x, y, z)
     status_code = 0
     return status_code
 
@@ -158,7 +165,8 @@ def setGripper(open):
 
     if not isinstance(open, bool):
         raise InvalidParametersException()
-
+    #TODO: add validatioon
+    manipulator.gripper.open()
     status_code = 0
     return status_code
 
