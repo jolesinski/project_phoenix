@@ -23,7 +23,7 @@ class Streamer (object):
         self.port = port
         self.camera = 0
         self.input_resolution = "320x240"
-        self.output_resolution = "1024x768"
+        self.output_resolution = "320x240"
 
 
     def startStream (self, camera = 0):
@@ -36,6 +36,7 @@ class Streamer (object):
         """
         self.camera = camera
         self.runFF = subprocess.Popen( [    "ffmpeg",
+                                            "-f", "video4linux2", 
                                             "-s", self.input_resolution,        #resolution
                                             "-i", "/dev/video" + str(camera),   #cam device number
                                             "-s", self.output_resolution,
