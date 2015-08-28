@@ -71,7 +71,7 @@ class Streamer (object):
         self.startStream(camera)
 
 
-    def setInputStreamResolution (self, new_resolution):
+    def setInputResolution (self, new_resolution):
         """
         Set new input resolution, will be applied until next change.
         :param new_resolution: New resolution in string format, ex: '640x420'
@@ -92,7 +92,7 @@ class Streamer (object):
         Get actual resolution
         :return: resolution of stream
         """
-        return self.resolution
+        return self.input_resolution
 
 
     def __del__(self):
@@ -115,7 +115,7 @@ if __name__ == '__main__':
 
     sleep(10)
 
-    testStreamer.setInputStreamResolution('128x76')
+    testStreamer.setInputResolution('128x76')
 
     sleep(10)
 

@@ -63,5 +63,50 @@
             "wheel": 1
         },
         "returns": 1
+    },
+    {
+        "name": "chassisDrive",
+        "params": {
+            "speed": 1,
+            "direction": 1
+        },
+        "returns": 1
+    },
+    {
+        "name": "chassisStop",
+        "returns": 1
+    },
+    {
+        "name": "USBCamStartStream",
+        "params": {
+            "camera": 1
+        }
+
+    },
+    {
+        "name": "USBCamStopStream",
+        "returns": "Output"
+    },
+    {
+        "name": "USBCamSwitchCamera",
+        "params": {
+            "camaera": 1
+        }
+    },
+    {
+        "name": "USBCamSetInputResolution",
+        "params": {
+            "new_resolution": "320x240"
+        }
+    },
+    {
+        "name": "USBCamSetOutputResolution",
+        "params": {
+            "new_resolution": "320x240"
+        }
+    },
+    {
+        "name": "USBCamGetStreamResolution",
+        "returns": "320x240"
     }
 ]
