@@ -1,7 +1,7 @@
 import serial
 
 class GpsModule (object):
-	def __init__ (self, port1 = '/dev/ttyUSB0', baudrate = 9600, timeout = 1):
+	def __init__ (self, port1 = '/dev/ttyUSB1', baudrate = 9600, timeout = 1):
         	self.baudrate = baudrate
 		self.timeout = timeout
 		self.port = port1
