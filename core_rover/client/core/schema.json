@@ -63,5 +63,9 @@
             "wheel": 1
         },
         "returns": 1
+    },
+    {
+        "name": "getGPS",
+        "returns": [3.14, 3.14]
     }
 ]
