@@ -107,13 +107,24 @@ class RoverClient : public jsonrpc::Client
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-	Json::Value getGPS() throw (jsonrpc::JsonRpcException)
+        Json::Value getGPS() throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p = Json::nullValue;
             Json::Value result = this->CallMethod("getGPS",p);
             if (result.isArray())
                 return result;
+            else
+                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+        }
+        int setCameraOrientation(double angle_x, double angle_z) throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p["angle_x"] = angle_x;
+            p["angle_z"] = angle_z;
+            Json::Value result = this->CallMethod("setCameraOrientation",p);
+            if (result.isInt())
+                return result.asInt();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }

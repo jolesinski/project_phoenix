@@ -1,1 +1,1 @@
-#Module for ip cam orientation control with two servo motors
+from core_rover.server.subsystems.camera.gimbal.base import Gimbal
