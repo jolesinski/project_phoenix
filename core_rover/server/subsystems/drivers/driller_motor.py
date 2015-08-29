@@ -3,7 +3,8 @@ from core_rover.server.subsystems.drivers.base import BaseDriver
 
 
 class DrillerMotor(BaseDriver):
-    def __init__(self, driller_num):
+    def __init__(self, address, driller_num):
+        BaseDriver.__init__(self, address)
         self.driller_num = driller_num
 
     def echo(self):
