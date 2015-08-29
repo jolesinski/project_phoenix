@@ -6,6 +6,14 @@ class StepperMotor(BaseDriver):
         response_dict = self._request(command=1, params=[steps])
         return response_dict
 
+    def set_angle(self, angle=0):
+        steps = self.stepper_angle_to_steps(angle)
+        return self.move(steps)
+
+    def stepper_angle_to_steps(self, angle):
+        #DO SOME MAGIC HERE
+        raise NotImplementedError
+
     def stop(self):
         response_dict = self._request(command=2)
         return response_dict
@@ -36,10 +44,6 @@ class StepperMotor(BaseDriver):
 
     def get_motor_temperature(self):
         response_dict = self._request(command=9)
-        return response_dict
-
-    def servo_set_position(self, position=0):
-        response_dict = self._request(command=20, params=[position])
         return response_dict
 
     def reset(self):
