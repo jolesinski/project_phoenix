@@ -2,11 +2,14 @@ from core_rover.server.core.dispatcher.dispatcher import MethodDispatcher
 from core_rover.server.core.utils import InvalidParametersException, is_strict_int
 #subsystems - dirty
 from core_rover.server.subsystems.manipulator import Manipulator
+from core_rover.server.subsystems.gps import GpsModule
+
 
 dispatcher = MethodDispatcher()
 
 #subsystems - dirty
 manipulator = Manipulator()
+gps = GpsModule()
 
 @dispatcher.add_method
 def setJointAngle(joint, angle):
@@ -216,3 +219,16 @@ def getWheelSpeed(wheel):
 
     speed = 0
     return speed
+
+@dispatcher.add_method
+def getGPS():
+     r"""Returns latitude and longitude of the rover.
+ 
+     Returns
+     -------
+     coordinates : list
+         Latitude and longitude of the rover in a form of [a, b] list, where a,
+         b are float values.
+     """
+     coordinates = gps.getGPS()
+     return coordinates
