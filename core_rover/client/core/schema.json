@@ -67,8 +67,8 @@
     {
         "name": "chassisDrive",
         "params": {
-            "speed": 1,
-            "direction": 1
+            "speed": 1.0,
+            "direction": 1.0
         },
         "returns": 1
     },
@@ -81,16 +81,15 @@
         "params": {
             "camera": 1
         }
-
     },
     {
         "name": "USBCamStopStream",
-        "returns": "Output"
+        "returns": 1
     },
     {
         "name": "USBCamSwitchCamera",
         "params": {
-            "camaera": 1
+            "camera": 1
         }
     },
     {
