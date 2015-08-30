@@ -21,4 +21,3 @@ def is_strict_int(value):
         bool
             True if value is int and is not bool.
     """
-    return isinstance(value, int) and not isinstance(value, bool)

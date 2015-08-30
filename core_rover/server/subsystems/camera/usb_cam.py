@@ -1,7 +1,4 @@
 #In develop version
-#TODO: checking available cams
-#TODO: refactor
-#TODO: maybe parsing line args
 
 #First, check connected cams by running:
 # $ ls /dev/video*
@@ -14,7 +11,7 @@ from time import sleep
 import subprocess
 
 
-class Streamer (object):
+class USBStreamer (object):
     """
     General class for streaming cams.
     """
@@ -58,8 +55,7 @@ class Streamer (object):
         Stop stream and kills last streaming process.
         :return:
         """
-        stop_output = self.runFF.kill()
-        print stop_output
+        self.runFF.kill()
 
     def switchCamera (self, camera):
         """
@@ -101,7 +97,7 @@ class Streamer (object):
 
 #TEST
 if __name__ == '__main__':
-    testStreamer = Streamer()
+    testStreamer = USBStreamer()
     testStreamer.DisplayStream()
     testStreamer.startStream(1)
 
