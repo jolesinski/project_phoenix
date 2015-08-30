@@ -7,12 +7,12 @@
 
 #include <jsonrpccpp/client.h>
 
-class RoverClient : public jsonrpc::Client
+class roverclient : public jsonrpc::Client
 {
     public:
-        RoverClient(jsonrpc::IClientConnector &conn, jsonrpc::clientVersion_t type = jsonrpc::JSONRPC_CLIENT_V2) : jsonrpc::Client(conn, type) {}
+        roverclient(jsonrpc::IClientConnector &conn, jsonrpc::clientVersion_t type = jsonrpc::JSONRPC_CLIENT_V2) : jsonrpc::Client(conn, type) {}
 
-        int setJointAngle(int joint, double angle) throw (jsonrpc::JsonRpcException)
+        int setJointAngle(double angle, int joint) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p["angle"] = angle;
@@ -86,7 +86,7 @@ class RoverClient : public jsonrpc::Client
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        int setWheelSpeed(int wheel, int speed) throw (jsonrpc::JsonRpcException)
+        int setWheelSpeed(int speed, int wheel) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p["speed"] = speed;
@@ -104,6 +104,71 @@ class RoverClient : public jsonrpc::Client
             Json::Value result = this->CallMethod("getWheelSpeed",p);
             if (result.isInt())
                 return result.asInt();
+            else
+                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+        }
+        int chassisDrive(int direction, int speed) throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p["direction"] = direction;
+            p["speed"] = speed;
+            Json::Value result = this->CallMethod("chassisDrive",p);
+            if (result.isInt())
+                return result.asInt();
+            else
+                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+        }
+        int chassisStop() throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p = Json::nullValue;
+            Json::Value result = this->CallMethod("chassisStop",p);
+            if (result.isInt())
+                return result.asInt();
+            else
+                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+        }
+        void USBCamStartStream(int camera) throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p["camera"] = camera;
+            this->CallNotification("USBCamStartStream",p);
+        }
+        std::string USBCamStopStream() throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p = Json::nullValue;
+            Json::Value result = this->CallMethod("USBCamStopStream",p);
+            if (result.isString())
+                return result.asString();
+            else
+                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+        }
+        void USBCamSwitchCamera(int camaera) throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p["camaera"] = camaera;
+            this->CallNotification("USBCamSwitchCamera",p);
+        }
+        void USBCamSetInputResolution(const std::string& new_resolution) throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p["new_resolution"] = new_resolution;
+            this->CallNotification("USBCamSetInputResolution",p);
+        }
+        void USBCamSetOutputResolution(const std::string& new_resolution) throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p["new_resolution"] = new_resolution;
+            this->CallNotification("USBCamSetOutputResolution",p);
+        }
+        std::string USBCamGetStreamResolution() throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p = Json::nullValue;
+            Json::Value result = this->CallMethod("USBCamGetStreamResolution",p);
+            if (result.isString())
+                return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
