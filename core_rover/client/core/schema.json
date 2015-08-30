@@ -108,5 +108,9 @@
     {
         "name": "USBCamGetStreamResolution",
         "returns": "320x240"
+    },
+    {
+        "name": "getGPS",
+        "returns": [3.14, 3.14]
     }
 ]
