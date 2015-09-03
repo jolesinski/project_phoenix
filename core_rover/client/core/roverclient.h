@@ -182,6 +182,28 @@ class roverclient : public jsonrpc::Client
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
+        int enableRegulator(double dest_latitude, double dest_longitude, double speed = 1.0) throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p["dest_latitude"] = dest_latitude;
+            p["dest_longitude"] = dest_longitude;
+            p["speed"] = speed;
+            Json::Value result = this->CallMethod("enableRegulator",p);
+            if (result.isInt())
+                return result.asInt();
+            else
+                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+        }
+        int disableRegulator() throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p = Json::nullValue;
+            Json::Value result = this->CallMethod("disableRegulator",p);
+            if (result.isInt())
+                return result.asInt();
+            else
+                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+        }
 };
 
 #endif //JSONRPC_CPP_STUB_ROVERCLIENT_H_

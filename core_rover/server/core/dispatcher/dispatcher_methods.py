@@ -358,3 +358,33 @@ def USBCamGetStreamResolution():
 
     resolution = USBCam.getStreamResolution()
     return resolution
+
+@dispatcher.add_method
+def enableRegulation(latitude, longitude, speed = 1.0):
+    r"""Enable automatic control based on given destination coordinates
+        BEWART OF UNTESTED USAGE
+    Params
+    ------
+    latitude : float
+        Destination latitude
+    longitude : float
+        Destination longitude
+    speed : float
+        Drive speed, default 1.0
+    """
+
+    regulator.run_auto(latitude, longitude, speed)
+    status_code = 0
+    return status_code
+
+@dispatcher.add_method
+def disableRegulation():
+    r"""Disables automatic drive
+
+    Returns:
+    -------
+    status_code : int
+        0 if succes
+    """
+    regulator.stop_automatic_drive()
+
