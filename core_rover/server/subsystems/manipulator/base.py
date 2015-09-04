@@ -17,8 +17,8 @@ class Manipulator(object):
                        StepperMotor(address=102), #up1/down1
                        StepperMotor(address=103), #up2/down2
                        StepperMotor(address=104), #rotate gripper
-                       ServoMotor(address=105), #catch/open?
-                       StepperMotor(address=105)] #catch/open?
+                       ServoMotor(address=105), #gripper up/down
+                       StepperMotor(address=105)] #catch/open
         self.gripper = Gripper(address=106) #???
 
     def set_joint_angles(self, angles):
@@ -34,24 +34,26 @@ class Manipulator(object):
             if isinstance(self.joints[i], StepperMotor):
                 self.joints[i].set_speed(angles[i])
 
-    def manipulate_joint(self, action, angle):
-        if action == 'RIGHT1' or action == 'LEFT1' #rotates manipulator
+    def manipulate_joint(self, action, angle=2):
+        if action == 'ROTATE1' #rotates all the manipulator
             joint=self.joints[0]
             joint.set_angle(angle)
-        elif action == 'UP1' or action == 'DOWN1' #first part of manipulator goes up/down
+        elif action == 'VERTICAL1' #first part of manipulator goes up/down
             joint=self.joints[1]
             joint.set_angle(angle)
-        elif action == 'UP2' or action == 'DOWN2' #second part of manipulator goes up/down
+        elif action == 'VERTICAL2' #second part of manipulator goes up/down
             joint=self.joints[2]
             joint.set_angle(angle)
-        elif action == 'RIGHT2' or action == 'LEFT2' #rotates gripper
+        elif action == 'ROTATE2'  #rotates gripper
             joint=self.joints[3]
             joint.set_angle(angle)
-        elif action == 'OPEN' or 'GRAB' #not sure
+        elif action == 'VERTICAL3'  #gripper goes up/down
             joint=self.jonts[4]
             joint.set_angle(angle)
+        elif action == 'BARK'  #you can grab or open gripper
             joint=self.jonts[5]
             joint.set_angle(angle)
+
 
     def reset_motor(self, number):
         joint=self.joints[number]
