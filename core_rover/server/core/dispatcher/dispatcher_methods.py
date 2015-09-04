@@ -85,8 +85,8 @@ def setJointSpeed(joint, speed):
     if not (is_strict_int(joint) and is_strict_int(speed)):
         raise InvalidParametersException()
 
-    # Body
-    status_code = 0
+    response = manipulator.joints[joint].set_speed(angle)
+    status_code = response.status
     return status_code
 
 
@@ -388,3 +388,59 @@ def disableRegulation():
     """
     regulator.stop_automatic_drive()
 
+@dispatcher.add_method
+def ManipulateJoint(action, angle):
+    r"""Changes position of manipulator
+
+    Params:
+    ------
+    action : string
+        Name of action, which will be done. UP1/DOWN1, UP2/DOWN2, RIGHT1/DOWN1, RIGHT2/DOWN2
+    angle : floating point number
+        How much will be moved specified joint.
+
+    Returns
+    -------
+    status_code : int
+        Returns 0, because we want to handle errors and thats impossible with
+        notifications.
+    """
+
+    manipulator.manipulate_joint(action, angle)
+    status_code = 0
+    return status_code
+
+@dispatcher.add_method
+def resetMotor(number):
+    r"""Resets selected manipulator motor.
+
+    Params:
+    ------
+    number : int
+        Number of motor, which should be reseted.
+
+    Returns
+    -------
+    status_code : int
+        Returns 0, because we want to handle errors and thats impossible with
+        notifications.
+    """
+
+    manipulator.reset_joint(number)
+    status_code = 0
+    return status_code
+
+@dispatcher.add_method
+def resetAllMotors():
+    r"""Resets all manipulator motors.
+
+    Returns
+    -------
+    status_code : int
+        Returns 0, because we want to handle errors and thats impossible with
+        notifications.
+    """
+
+    manipulator.reset_all_motors()
+    status_code = 0
+    return status_code

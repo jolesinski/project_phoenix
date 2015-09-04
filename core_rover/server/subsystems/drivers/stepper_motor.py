@@ -11,7 +11,7 @@ class StepperMotor(BaseDriver):
         return self.move(steps)
 
     def stepper_angle_to_steps(self, angle):
-        #DO SOME MAGIC HERE
+        #DO SOME MAGIC HERE have to be done, but data needed!
         raise NotImplementedError
 
     def stop(self):

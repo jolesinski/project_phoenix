@@ -11,7 +11,7 @@ class ServoMotor(BaseDriver):
         return self.servo_set_position(position)
 
     def servo_angle_to_position(self, angle):
-        #DO SOME MAGIC HERE <- WTF?
+        #DO SOME MAGIC HERE <- WTF? have to be done, but data needed!
         raise NotImplementedError
 
     def present(self):

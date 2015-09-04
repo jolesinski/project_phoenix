@@ -30,6 +30,25 @@
         "returns": 1
     },
     {
+        "name": "ManipulateJoint",
+        "params": {
+            "action": "go",
+            "angle": 3.14
+        },
+        "returns": 1
+    },
+    {
+        "name": "resetMotor",
+        "params": {
+            "joint": 1
+        },
+        "returns": 1
+    },
+    {
+        "name": "resetAllMotors",
+        "returns": 1
+    },
+    {
         "name": "setCartesianPosition",
         "params": {
             "x": 3.14,

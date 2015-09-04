@@ -54,6 +54,37 @@ class roverclient : public jsonrpc::Client
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
+        int ManipulateJoint(const std::string& action, double angle) throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p["action"] = action;
+            p["angle"] = angle;
+            Json::Value result = this->CallMethod("ManipulateJoint",p);
+            if (result.isInt())
+                return result.asInt();
+            else
+                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+        }
+        int resetMotor(int joint) throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p["joint"] = joint;
+            Json::Value result = this->CallMethod("resetMotor",p);
+            if (result.isInt())
+                return result.asInt();
+            else
+                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+        }
+        int resetAllMotors() throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p = Json::nullValue;
+            Json::Value result = this->CallMethod("resetAllMotors",p);
+            if (result.isInt())
+                return result.asInt();
+            else
+                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+        }
         int setCartesianPosition(double x, double y, double z) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
