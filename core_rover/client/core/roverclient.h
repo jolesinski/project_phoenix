@@ -7,12 +7,12 @@
 
 #include <jsonrpccpp/client.h>
 
-class roverclient : public jsonrpc::Client
+class RoverClient : public jsonrpc::Client
 {
     public:
-        roverclient(jsonrpc::IClientConnector &conn, jsonrpc::clientVersion_t type = jsonrpc::JSONRPC_CLIENT_V2) : jsonrpc::Client(conn, type) {}
+        RoverClient(jsonrpc::IClientConnector &conn, jsonrpc::clientVersion_t type = jsonrpc::JSONRPC_CLIENT_V2) : jsonrpc::Client(conn, type) {}
 
-        int setJointAngle(double angle, int joint) throw (jsonrpc::JsonRpcException)
+        int setJointAngle(int joint, double angle) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p["angle"] = angle;
@@ -86,7 +86,7 @@ class roverclient : public jsonrpc::Client
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        int setWheelSpeed(int speed, int wheel) throw (jsonrpc::JsonRpcException)
+        int setWheelSpeed(int wheel, int speed) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p["speed"] = speed;
@@ -107,7 +107,7 @@ class roverclient : public jsonrpc::Client
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        int chassisDrive(double direction, double speed) throw (jsonrpc::JsonRpcException)
+        int chassisDrive(double speed, double direction) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p["direction"] = direction;

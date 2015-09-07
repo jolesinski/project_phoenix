@@ -13,7 +13,7 @@ int main()
     RoverClient client(httpclient);
     try
     {
-        cout << client.setJointAngle(3.14, 1) << endl;
+        cout << client.getJointAngle(1) << endl;
     }
     catch (JsonRpcException e)
     {

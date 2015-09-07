@@ -1,7 +1,7 @@
 ##Client generation
 Method arguments in client stubs are generated from jsonrpcstub in lexicographical order  
 To maintain clean api after adding new methods:  
-1. generate new client  
+1. jsonrpcstub schema.json --cpp-client=RoverClient
 2. cp roverclient.h temp_roverclient.h  
 3. git apply fixParamOrder.patch  
 4. manually fix order for new methods  
