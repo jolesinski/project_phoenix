@@ -182,6 +182,17 @@ class roverclient : public jsonrpc::Client
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
+        int setCameraOrientation(double angle_x, double angle_z) throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p["angle_x"] = angle_x;
+            p["angle_z"] = angle_z;
+            Json::Value result = this->CallMethod("setCameraOrientation",p);
+            if (result.isInt())
+                return result.asInt();
+            else
+                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+        }
 };
 
 #endif //JSONRPC_CPP_STUB_ROVERCLIENT_H_

@@ -2,6 +2,7 @@ from core_rover.server.core.dispatcher.dispatcher import MethodDispatcher
 from core_rover.server.core.utils import InvalidParametersException, is_strict_int
 # subsystems - dirty
 from core_rover.server.subsystems.manipulator import Manipulator
+from core_rover.server.subsystems.camera import Gimbal
 from core_rover.server.subsystems.location.regulator import Regulator
 from core_rover.server.subsystems.chassis.chassis import Chassis
 from core_rover.server.subsystems.camera.usb_cam import USBStreamer
@@ -10,10 +11,10 @@ dispatcher = MethodDispatcher()
 
 # subsystems - dirty
 manipulator = Manipulator()
+gimbal = Gimbal()
 regulator = Regulator()
 chassis_driver = Chassis
 USBCam = USBStreamer(rtp='192.168.2.13', port=8074)
-
 
 @dispatcher.add_method
 def setJointAngle(joint, angle):
@@ -224,6 +225,31 @@ def getWheelSpeed(wheel):
     speed = 0
     return speed
 
+@dispatcher.add_method
+def setCameraOrientation(angle_x, angle_z):
+    r"""Sets orientation of IP camera gimbal.
+
+    Parameters
+    ----------
+    angle_x : float
+        Target angle around x axis in radians.
+    angle_z : float
+        Target angle around z axis in radians.
+
+    Returns
+    -------
+    status_code : int
+        Returns 0, because we want to handle errors and thats impossible with
+        notifications.
+    """
+
+    if not (isinstance(angle_x, float) and isinstance(angle_z, float)):
+        raise InvalidParametersException()
+
+    #add validation
+    response = gimbal.set_orientation(angle_x, angle_z)
+    status_code = response.status
+    return status_code
 
 @dispatcher.add_method
 def getGPS():
@@ -299,7 +325,6 @@ def USBCamStopStream():
     Returns
     -------
     status_code : int
-
     """
     USBCam.stopStream()
     status_code = 0
@@ -358,3 +383,4 @@ def USBCamGetStreamResolution():
 
     resolution = USBCam.getStreamResolution()
     return resolution
+>>>>>>> master

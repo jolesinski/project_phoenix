@@ -111,5 +111,13 @@
     {
         "name": "getGPS",
         "returns": [3.14, 3.14]
+    },
+    {
+        "name": "setCameraOrientation",
+        "params": {
+            "angle_x": 3.14,
+            "angle_z": 3.14
+        },
+        "returns": 1
     }
 ]
