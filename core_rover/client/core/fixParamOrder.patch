@@ -1,22 +1,48 @@
 diff --git a/core_rover/client/core/roverclient.h b/core_rover/client/core/roverclient.h
-index 73ccf61..cf07daf 100644
+index ce26197..c062866 100644
 --- a/core_rover/client/core/roverclient.h
 +++ b/core_rover/client/core/roverclient.h
-@@ -12,7 +12,7 @@ class RoverClient : public jsonrpc::Client
-     public:
-         RoverClient(jsonrpc::IClientConnector &conn, jsonrpc::clientVersion_t type = jsonrpc::JSONRPC_CLIENT_V2) : jsonrpc::Client(conn, type) {}
- 
--        int setJointAngle(double angle, int joint) throw (jsonrpc::JsonRpcException)
-+        int setJointAngle(int joint, double angle) throw (jsonrpc::JsonRpcException)
-         {
-             Json::Value p;
-             p["angle"] = angle;
-@@ -86,7 +86,7 @@ class RoverClient : public jsonrpc::Client
+@@ -107,7 +107,7 @@ class roverclient : public jsonrpc::Client
              else
                  throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
          }
--        int setWheelSpeed(int speed, int wheel) throw (jsonrpc::JsonRpcException)
-+        int setWheelSpeed(int wheel, int speed) throw (jsonrpc::JsonRpcException)
+-        int chassisDrive(int direction, int speed) throw (jsonrpc::JsonRpcException)
++        int chassisDrive(double direction, double speed) throw (jsonrpc::JsonRpcException)
          {
              Json::Value p;
-             p["speed"] = speed;
+             p["direction"] = direction;
+@@ -134,20 +134,20 @@ class roverclient : public jsonrpc::Client
+             p["camera"] = camera;
+             this->CallNotification("USBCamStartStream",p);
+         }
+-        std::string USBCamStopStream() throw (jsonrpc::JsonRpcException)
++        int USBCamStopStream() throw (jsonrpc::JsonRpcException)
+         {
+             Json::Value p;
+             p = Json::nullValue;
+             Json::Value result = this->CallMethod("USBCamStopStream",p);
+-            if (result.isString())
+-                return result.asString();
++            if (result.isInt())
++                return result.asInt();
+             else
+                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+         }
+-        void USBCamSwitchCamera(int camaera) throw (jsonrpc::JsonRpcException)
++        void USBCamSwitchCamera(int camera) throw (jsonrpc::JsonRpcException)
+         {
+             Json::Value p;
+-            p["camaera"] = camaera;
++            p["camera"] = camera;
+             this->CallNotification("USBCamSwitchCamera",p);
+         }
+         void USBCamSetInputResolution(const std::string& new_resolution) throw (jsonrpc::JsonRpcException)
+@@ -172,7 +172,7 @@ class roverclient : public jsonrpc::Client
+             else
+                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+         }
+-	Json::Value getGPS() throw (jsonrpc::JsonRpcException)
++        Json::Value getGPS() throw (jsonrpc::JsonRpcException)
+         {
+             Json::Value p;
+             p = Json::nullValue;

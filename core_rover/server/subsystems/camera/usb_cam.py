@@ -1,7 +1,4 @@
 #In develop version
-#TODO: checking available cams
-#TODO: refactor
-#TODO: maybe parsing line args
 
 #First, check connected cams by running:
 # $ ls /dev/video*
@@ -14,7 +11,7 @@ from time import sleep
 import subprocess
 
 
-class Streamer (object):
+class USBStreamer (object):
     """
     General class for streaming cams.
     """
@@ -58,8 +55,7 @@ class Streamer (object):
         Stop stream and kills last streaming process.
         :return:
         """
-        stop_output = self.runFF.kill()
-        print stop_output
+        self.runFF.kill()
 
     def switchCamera (self, camera):
         """
@@ -71,7 +67,7 @@ class Streamer (object):
         self.startStream(camera)
 
 
-    def setInputStreamResolution (self, new_resolution):
+    def setInputResolution (self, new_resolution):
         """
         Set new input resolution, will be applied until next change.
         :param new_resolution: New resolution in string format, ex: '640x420'
@@ -92,7 +88,7 @@ class Streamer (object):
         Get actual resolution
         :return: resolution of stream
         """
-        return self.resolution
+        return self.input_resolution
 
 
     def __del__(self):
@@ -101,7 +97,7 @@ class Streamer (object):
 
 #TEST
 if __name__ == '__main__':
-    testStreamer = Streamer()
+    testStreamer = USBStreamer()
     testStreamer.DisplayStream()
     testStreamer.startStream(1)
 
@@ -115,7 +111,7 @@ if __name__ == '__main__':
 
     sleep(10)
 
-    testStreamer.setInputStreamResolution('128x76')
+    testStreamer.setInputResolution('128x76')
 
     sleep(10)
 
