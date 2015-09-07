@@ -1,5 +1,4 @@
-from server.common import get_dispatcher
-from werkzeug.serving import run_simple
+from common import get_dispatcher
 
 if __name__ == '__main__':
     dispatcher = get_dispatcher()

@@ -1,4 +1,4 @@
-from core_rover.server.subsystems.drivers.base import BaseDriver
+from subsystems.drivers.base import BaseDriver
 
 
 class ServoMotor(BaseDriver):

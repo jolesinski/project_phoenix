@@ -1,6 +1,6 @@
 from array import array
 
-from core_rover.server.subsystems.fieldbus.utils import generate_crc8
+from subsystems.fieldbus.utils import generate_crc8
 
 
 # definitely needs refactoring (legacy code)

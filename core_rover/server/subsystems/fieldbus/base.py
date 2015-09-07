@@ -4,7 +4,7 @@ import time
 import enum
 
 import serial
-from core_rover.server.subsystems.fieldbus.frame import RequestFrame, ResponseFrame
+from subsystems.fieldbus.frame import RequestFrame, ResponseFrame
 from .utils import CommunicationError
 
 

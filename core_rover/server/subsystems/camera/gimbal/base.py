@@ -1,4 +1,4 @@
-from core_rover.server.subsystems.drivers import ServoMotor
+from subsystems.drivers import ServoMotor
 
 
 class Gimbal(object):

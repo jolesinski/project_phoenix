@@ -21,7 +21,7 @@ import errno
 import time
 import sys
 
-from core_rover.server.subsystems.fieldbus.serial.serialutil import *
+from subsystems.fieldbus.serial.serialutil import *
 
 
 # Do check the Python version as some constants have moved.

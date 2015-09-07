@@ -1,5 +1,5 @@
-from core_rover.server.subsystems.fieldbus import InvalidControllerParametersError
-from core_rover.server.subsystems.drivers.base import BaseDriver
+from subsystems.fieldbus import InvalidControllerParametersError
+from subsystems.drivers.base import BaseDriver
 
 
 class BLDCMotor(BaseDriver):

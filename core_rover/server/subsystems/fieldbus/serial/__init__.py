@@ -14,7 +14,7 @@ if not (sys.platform == 'cli'):
     import os
     # chose an implementation, depending on os
     if os.name == 'posix':
-        from core_rover.server.subsystems.fieldbus.serial.serialposix import *
+        from subsystems.fieldbus.serial.serialposix import *
     else:
         raise Exception("Sorry: no implementation for your platform ('%s') available" % os.name)
 else:

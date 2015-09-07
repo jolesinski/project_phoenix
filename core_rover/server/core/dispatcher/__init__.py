@@ -1,1 +1,1 @@
-__author__ = 'h3ra'
+from dispatcher_methods import dispatcher

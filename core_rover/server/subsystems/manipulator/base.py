@@ -1,4 +1,4 @@
-from core_rover.server.subsystems.drivers import StepperMotor, ServoMotor
+from subsystems.drivers import StepperMotor, ServoMotor
 
 
 class Gripper(StepperMotor):

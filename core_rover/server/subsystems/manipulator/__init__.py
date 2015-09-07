@@ -1,1 +1,1 @@
-from core_rover.server.subsystems.manipulator.base import Manipulator
+from subsystems.manipulator.base import Manipulator

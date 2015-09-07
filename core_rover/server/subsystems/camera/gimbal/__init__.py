@@ -1,1 +1,1 @@
-from core_rover.server.subsystems.camera.gimbal.base import Gimbal
+from subsystems.camera.gimbal.base import Gimbal

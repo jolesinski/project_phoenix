@@ -3,6 +3,7 @@ from jsonrpc.dispatcher import Dispatcher
 from werkzeug.serving import run_simple
 from werkzeug.wrappers import Request, Response
 
+
 class MethodDispatcher(Dispatcher):
     def __init__(self, address='localhost', port=8383, prototype=None):
         super(MethodDispatcher, self).__init__(prototype=prototype)

@@ -1,5 +1,5 @@
 import math
-from core_rover.server.subsystems.drivers import DrillerMotor
+from subsystems.drivers import DrillerMotor
 
 
 class Chassis(object):

@@ -1,11 +1,11 @@
-from core_rover.server.core.dispatcher.dispatcher import MethodDispatcher
-from core_rover.server.core.utils import InvalidParametersException, is_strict_int
+from dispatcher import MethodDispatcher
+from core.utils import InvalidParametersException, is_strict_int
 # subsystems - dirty
-from core_rover.server.subsystems.manipulator import Manipulator
-from core_rover.server.subsystems.camera import Gimbal
-from core_rover.server.subsystems.location.regulator import Regulator
-from core_rover.server.subsystems.chassis.chassis import Chassis
-from core_rover.server.subsystems.camera.usb_cam import USBStreamer
+from subsystems.manipulator import Manipulator
+from subsystems.camera import Gimbal
+from subsystems.location.regulator import Regulator
+from subsystems.chassis.chassis import Chassis
+from subsystems.camera.usb_cam import USBStreamer
 
 dispatcher = MethodDispatcher()
 
@@ -383,4 +383,3 @@ def USBCamGetStreamResolution():
 
     resolution = USBCam.getStreamResolution()
     return resolution
->>>>>>> master

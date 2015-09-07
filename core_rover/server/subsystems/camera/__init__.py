@@ -1,2 +1,2 @@
-from core_rover.server.subsystems.camera.gimbal import Gimbal
-from core_rover.server.subsystems.camera.FFmpegCamStream import Streamer
+from subsystems.camera.gimbal import Gimbal
+from subsystems.camera.usb_cam import USBStreamer
